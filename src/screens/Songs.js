@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, {useState, useEffect } from 'react';
 import {
     View,
     Image,
@@ -14,17 +14,19 @@ const Songs = function () {
 
     const [result, setResult] = useState([])
     const [loading, setLoading] = useState(false)
-    const [page, setPage] = useState(1)
 
     useEffect(() => {
+      fetchData()
+    }, []);
+
+    fetchData = () => {
         setLoading(true)
         NetworkManager.networkRequest(
             'https://itunes.apple.com/search?term=Michael+jackson',
             callBackSuccess,
             callBackFailure,
         );
-    }, [page]);
-
+    }  
 
     callBackSuccess = response => {
         if (response) {
@@ -37,7 +39,6 @@ const Songs = function () {
         Alert.alert("Something went Wrong")
     };
     detailScreen = (item) => {
-        console.log(item, "item data")
         Actions.detail({collectionName:item.collectionName,artworkUrl100:item.artworkUrl100})
     }
 
@@ -62,26 +63,14 @@ const Songs = function () {
             </TouchableOpacity>
         )
     }
-    handleMoreData = () => {
-        setPage(page + 1)
-    }
-
-    separatorComponent = () => {
-        return (
-            <View style={{ height: 1 }}>
-            </View>
-        )
-    }
+   
     return (
         <View style={styles.Container}>
             <FlatList
                 data={result}
                 renderItem={renderRow}
-                ItemSeparatorComponent={separatorComponent}
-                onRefresh={setResult}
+                onRefresh={()=> fetchData()}
                 refreshing={loading}
-                onEndReached={handleMoreData}
-                onEndReachedThreshold={0}
             />
         </View>
     )

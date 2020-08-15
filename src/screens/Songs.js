@@ -4,11 +4,10 @@ import {
     Image,
     Text,
     FlatList,
-    ActivityIndicator,
     TouchableOpacity,
     StyleSheet
 } from 'react-native';
-import NetworkManager from './network/NetworkManager'
+import NetworkManager from '../network/NetworkManager'
 import { Actions } from 'react-native-router-flux';
 
 const Songs = function () {
@@ -39,12 +38,12 @@ const Songs = function () {
     };
     detailScreen = (item) => {
         console.log(item, "item data")
-        Actions.detail()
+        Actions.detail({collectionName:item.collectionName,artworkUrl100:item.artworkUrl100})
     }
 
     renderRow = ({ index, item }) => {
         return (
-            <TouchableOpacity onPress={(item) => detailScreen()}>
+            <TouchableOpacity onPress={() => detailScreen(item)}>
                 <View style={styles.rowContainer}>
                     <View style={styles.imageView}>
                         <Image style={styles.image}
@@ -91,7 +90,7 @@ const Songs = function () {
 const styles = StyleSheet.create({
     Container: {
         flex: 1,
-        backgroundColor: 'black'
+        backgroundColor: 'gray'
     },
     rowContainer: {
         margin: 5,
@@ -101,7 +100,6 @@ const styles = StyleSheet.create({
         margin: 10
     },
     image: {
-        backgroundColor: 'red',
         resizeMode: "cover",
         height: 50,
         width: 50
@@ -112,10 +110,14 @@ const styles = StyleSheet.create({
         marginRight: 20
     },
     headerText: {
-        marginLeft: 10, color: 'white', fontWeight: 'bold'
+        marginLeft: 10, 
+        color: 'white', 
+        fontWeight: 'bold'
     },
     artistText:{
-         marginLeft: 10,color:'white',fontWeight:'bold'
+         marginLeft: 10,
+         color:'white',
+         fontWeight:'bold'
     }
 })
 export default Songs

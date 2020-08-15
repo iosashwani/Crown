@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Router, Scene } from 'react-native-router-flux';
-import Songs from './Songs'
-import SongsDetail from './SongsDetail'
+import Songs from './src/screens/Songs'
+import SongsDetail from './src/screens/SongsDetail'
 
 const RouterComponent = function () {
-  console.log("ashwani rajput")
+  
   return (
     <Router>
       <Scene key="root">
@@ -22,13 +22,8 @@ const RouterComponent = function () {
         />
 
       </Scene>
-
-
     </Router>
   )
-
-
-
 }
 
 export default RouterComponent

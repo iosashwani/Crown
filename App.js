@@ -12,7 +12,7 @@ import {
   Text,
   View
 } from 'react-native';
-import RouterComponent from './src/Router'
+import RouterComponent from './Router'
 
 
 const App = function(){
